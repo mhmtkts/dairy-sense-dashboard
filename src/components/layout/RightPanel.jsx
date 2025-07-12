@@ -1,47 +1,45 @@
 import React, { useState } from 'react';
 import Popup from '../dashboard/Popup'; // Popup dosyanızın yolu doğruysa bu satırı değiştirmeyin
-import { BsBell, BsCheckCircle, BsPersonCircle, BsExclamationCircle } from 'react-icons/bs';
 import { PiBugBeetle, PiBroadcast  } from "react-icons/pi"; // Bu ikon kullanılmıyor ama kalabilir
 import { LiaUser } from "react-icons/lia";
 
-// Genel liste elemanı (Bildirimler ve Hekimler için)
-const ListItem = ({ icon, imageUrl, title, subtitle, onClick }) => (
+// 1. ListItem bileşenini küçültüyoruz
+const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => (
   <div
-    className="flex items-center gap-4 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+    className="flex items-center gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
     onClick={() => onClick(title)}
   >
     {imageUrl ? (
-      <img src={imageUrl} alt={title} className="w-9 h-9 rounded-full object-cover flex-shrink-0" />
+      <img src={imageUrl} alt={title} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
     ) : (
-      <div className={`mt-1`}>{icon}</div>
+      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${iconBgColor}`}>
+        {icon}
+      </div>
     )}
     
     <div>
-      <p className="font-medium text-gray-800 text-sm">{title}</p>
-      <p className="text-xs text-gray-500">{subtitle}</p>
+      <p className="font-medium text-gray-800 text-xs">{title}</p>
+      <p className="text-[11px] text-gray-500">{subtitle}</p>
     </div>
   </div>
 );
 
-// 1. "Son İşlemler" için özel Timeline elemanı
+// 2. TimelineItem bileşenini küçültüyoruz
 const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
   <div 
-    className="flex items-start gap-4 p-2 rounded-lg hover:bg-gray-100 cursor-pointer"
+    className="flex items-start gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
     onClick={() => onClick(title)}
   >
-    {/* Dikey çizgi ve profil fotoğrafı için konteyner */}
     <div className="relative flex flex-col items-center flex-shrink-0">
-      <img src={imageUrl} alt={title} className="w-9 h-9 rounded-full object-cover z-10" />
-      {/* Eğer son eleman değilse, dikey çizgiyi çiz */}
+      <img src={imageUrl} alt={title} className="w-8 h-8 rounded-full object-cover z-10" />
       {!isLast && (
-        <div className="absolute top-9 h-1/2 mt-1 w-px bg-gray-200"></div>
+        <div className="absolute top-8 h-1/2 mt-1 w-px bg-gray-200"></div>
       )}
     </div>
     
-    {/* Başlık ve alt başlık */}
-    <div className="pt-1">
-      <p className="font-medium text-gray-800 text-sm">{title}</p>
-      <p className="text-xs text-gray-500">{subtitle}</p>
+    <div className="pt-0.5">
+      <p className="font-medium text-gray-800 text-xs">{title}</p>
+      <p className="text-[11px] text-gray-500">{subtitle}</p>
     </div>
   </div>
 );
@@ -60,12 +58,12 @@ const RightPanel = () => {
     setIsPopupOpen(false);
   };
 
-  // --- Veriler aynı kalıyor ---
+  // 3. İkon boyutlarını küçültüyoruz
   const notifications = [
-    { id: 1, icon: <PiBugBeetle size={20} className='bg-[#ECEEFB]' />, title: 'Veri Girişi Yapılmamış', subtitle: 'Bugün'},
-    { id: 2, icon: <LiaUser size={20} className='bg-[#E7F1FD]'/>, title: '4 Yeni Kızgınlık', subtitle: '59 dakika önce' },
-    { id: 3, icon: <PiBugBeetle size={20} className='bg-[#ECEEFB]' />, title: '2 Kayıtaz Tasma Algılandı', subtitle: '12 saat önce' },
-    { id: 4, icon: <PiBroadcast size={20} className='bg-[#E7F1FD]'/>, title: '4 Tohumlama Yapıldı', subtitle: 'Delay için tıklayınız...' },
+    { id: 1, icon: <PiBugBeetle size={18} />, title: 'Veri Girişi Yapılmamış', subtitle: 'Bugün', iconBgColor: 'bg-[#ECEEFB]' },
+    { id: 2, icon: <LiaUser size={18} />, title: '4 Yeni Kızgınlık', subtitle: '59 dakika önce', iconBgColor: 'bg-[#E7F1FD]' },
+    { id: 3, icon: <PiBugBeetle size={18} />, title: '2 Kayıtsız Tasma Algılandı', subtitle: '12 saat önce', iconBgColor: 'bg-[#ECEEFB]' },
+    { id: 4, icon: <PiBroadcast size={18} />, title: '4 Tohumlama Yapıldı', subtitle: 'Delay için tıklayınız...', iconBgColor: 'bg-[#E7F1FD]' },
   ];
 
   const recentActions = [
@@ -86,7 +84,7 @@ const RightPanel = () => {
 
   return (
     <>
-      <aside className="w-80 flex-shrink-0 bg-white p-6 flex flex-col space-y-6 border-l border-gray-200 overflow-y-auto">
+      <aside className="flex-shrink-0 bg-white p-6 flex flex-col space-y-6 border-l border-gray-200 overflow-y-auto">
         
         <div>
           <h3 className="font-semibold text-gray-800 mb-2">Bildirimler</h3>
@@ -100,13 +98,12 @@ const RightPanel = () => {
         <div>
           <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
           <div className="space-y-1">
-            {/* 2. "Son İşlemler" için yeni TimelineItem bileşenini kullanıyoruz */}
             {recentActions.map((item, index) => (
               <TimelineItem 
                 key={item.id} 
                 {...item} 
                 onClick={handleItemClick}
-                isLast={index === recentActions.length - 1} // Son eleman olup olmadığını kontrol et
+                isLast={index === recentActions.length - 1}
               />
             ))}
           </div>
