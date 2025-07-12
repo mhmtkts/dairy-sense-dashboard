@@ -18,7 +18,7 @@ const Navbar = () => {
 
         {/* Favori ikonu */}
         <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-          <MdHistory size={22} />
+          <IoMdStarOutline size={22} />
         </button>
         
         {/* Breadcrumbs */}
@@ -46,7 +46,7 @@ const Navbar = () => {
           <FiSun size={20} />
         </button>
         <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-          <IoMdStarOutline size={22} />
+          <MdHistory size={22} />
         </button>
         <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
           <IoNotificationsOutline size={22} />
