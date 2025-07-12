@@ -2,6 +2,8 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/layout/Sidebar';
 import DashboardPage from './pages/DashboardPage';
+import Navbar from './components/layout/Navbar';
+import RightPanel from './components/layout/RightPanel';
 
 const PlaceholderPage = () => (
   <div className="p-4">
@@ -13,21 +15,29 @@ function App() {
   return (
     <div className="flex h-screen bg-gray-100 font-sans">
       <Sidebar />
-      <main className="flex-1 p-6 overflow-y-auto">
-        <Routes>
-          {/* Ana sayfa için gerçek bileşeni göster */}
-          <Route path="/" element={<DashboardPage />} />
+      
+      {/* ORTA SÜTUN İÇİN YENİ ANA KAPSAYICI */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Navbar artık padding'den etkilenmiyor ve en üstte */}
+        <Navbar />
 
-          {/* Diğer tüm rotalar için SADECE yer tutucuyu göster */}
-          <Route path="/reports" element={<PlaceholderPage />} />
-          <Route path="/protocols" element={<PlaceholderPage />} />
-          <Route path="/events" element={<PlaceholderPage />} />
-          <Route path="/agenda" element={<PlaceholderPage />} />
-          <Route path="/users" element={<PlaceholderPage />} />
-          <Route path="/treatments" element={<PlaceholderPage />} />
-          <Route path="/chats" element={<PlaceholderPage />} />
-        </Routes>
-      </main>
+        {/* Asıl içerik alanı şimdi kendi başına ve scroll edilebilir */}
+        <main className="flex-1 p-6 overflow-y-auto">
+          <Routes>
+            <Route path="/" element={<DashboardPage />} />
+            {/* ... diğer rotalar ... */}
+            <Route path="/reports" element={<PlaceholderPage />} />
+            <Route path="/protocols" element={<PlaceholderPage />} />
+            <Route path="/events" element={<PlaceholderPage />} />
+            <Route path="/agenda" element={<PlaceholderPage />} />
+            <Route path="/users" element={<PlaceholderPage />} />
+            <Route path="/treatments" element={<PlaceholderPage />} />
+            <Route path="/chats" element={<PlaceholderPage />} />
+          </Routes>
+        </main>
+      </div>
+
+      <RightPanel />
     </div>
   );
 }
