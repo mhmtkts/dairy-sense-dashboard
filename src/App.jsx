@@ -7,13 +7,13 @@ import RightPanel from './components/layout/RightPanel';
 
 const PlaceholderPage = () => (
   <div className="p-4">
-    <h2 className="text-xl text-gray-500">Bu sayfanın içeriği case study kapsamında değildir.</h2>
+    <h2 className="text-xl bg-white">Bu sayfanın içeriği case study kapsamında değildir.</h2>
   </div>
 );
 
 function App() {
   return (
-    <div className="flex h-screen bg-gray-100 font-sans">
+    <div className="flex h-screen bg-white font-sans">
       <Sidebar />
       
       {/* ORTA SÜTUN İÇİN YENİ ANA KAPSAYICI */}

@@ -24,10 +24,9 @@ const Sidebar = () => {
   const {t} = useTranslation();
 
   return (
-    <aside className="w-50 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
+    <aside className="w-55 flex-shrink-0 bg-white border-r border-gray-200 flex flex-col">
       <img src="/src/assets/cropped-cropped-DairySense.png" alt="Logo" className="object-cover" />
 
-      {/* Menü Linkleri */}
       <nav className="flex-1 px-4 py-6 space-y-2">
         <NavLink to="/" className={navLinkClasses}>
           <PiChartPieSliceFill className='w-6 h-6 mr-3' />
@@ -63,7 +62,6 @@ const Sidebar = () => {
         </NavLink>
       </nav>
 
-      {/* Kullanıcı Bilgisi */}
       <div className="p-4 border-t border-gray-200">
         <div className="flex items-center">
             <div className="w-7 h-7 bg-gray-300 rounded-full">

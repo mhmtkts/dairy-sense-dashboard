@@ -1,19 +1,22 @@
 import React from 'react';
+import { FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 
-const InfoCard = ({ icon, title, value, change, iconBgColor }) => {
-  const isPositive = change && change.startsWith('+');
-  const changeColor = isPositive ? 'text-green-500' : 'text-red-500';
+const InfoCard = ({ title, value, change, bgColor = 'bg-gray-50' }) => {
+  const isPositive = change && !change.startsWith('-');
+  
+  const TrendIcon = isPositive ? FiTrendingUp : FiTrendingDown;
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm flex items-center">
-      <div className={`w-12 h-12 rounded-full flex items-center justify-center ${iconBgColor} mr-4`}>
-        {icon}
-      </div>
-      <div>
-        <p className="text-sm text-gray-500">{title}</p>
-        <p className="text-2xl font-bold text-gray-800">{value}</p>
+    <div className={`${bgColor} p-5 rounded-2xl flex flex-col justify-between h-full`}>
+      <p className="text-sm font-medium text-gray-900">{title}</p>
+      
+      <div className="flex justify-start gap-5 mt-2">
+        <p className="text-2xl font-bold text-gray-900">{value}</p>
         {change && (
-          <p className={`text-sm font-medium ${changeColor}`}>{change}</p>
+          <div className={`flex items-center text-sm font-semibold text-gray-900`}>
+            <span>{change}</span>
+            <TrendIcon className="ml-2" size={14} />
+          </div>
         )}
       </div>
     </div>

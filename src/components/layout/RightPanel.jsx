@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import Popup from '../dashboard/Popup'; // Popup dosyanızın yolu doğruysa bu satırı değiştirmeyin
-import { PiBugBeetle, PiBroadcast  } from "react-icons/pi"; // Bu ikon kullanılmıyor ama kalabilir
+import Popup from '../dashboard/Popup';
+import { PiBugBeetle, PiBroadcast  } from "react-icons/pi";
 import { LiaUser } from "react-icons/lia";
 
-// 1. ListItem bileşenini küçültüyoruz
 const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => (
   <div
     className="flex items-center gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
@@ -24,7 +23,6 @@ const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => 
   </div>
 );
 
-// 2. TimelineItem bileşenini küçültüyoruz
 const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
   <div 
     className="flex items-start gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
@@ -58,7 +56,6 @@ const RightPanel = () => {
     setIsPopupOpen(false);
   };
 
-  // 3. İkon boyutlarını küçültüyoruz
   const notifications = [
     { id: 1, icon: <PiBugBeetle size={18} />, title: 'Veri Girişi Yapılmamış', subtitle: 'Bugün', iconBgColor: 'bg-[#ECEEFB]' },
     { id: 2, icon: <LiaUser size={18} />, title: '4 Yeni Kızgınlık', subtitle: '59 dakika önce', iconBgColor: 'bg-[#E7F1FD]' },
