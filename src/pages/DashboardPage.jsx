@@ -19,25 +19,25 @@ const DashboardPage = () => {
           title="Son 24 Saat Süt"
           value="7,265"
           change="+11.01%"
-          bgColor="bg-[#F6F5FA]"
+          bgColor="bg-[#E9ECFA]"
         />
         <InfoCard
           title="Dün Toplam Süt"
           value="3,671"
           change="-0.03%"
-          bgColor="bg-[#F0F5FA]"
+          bgColor="bg-[#E4F0FC]"
         />
         <InfoCard
           title="Sağılan İnek Sayısı"
           value="156"
           change="+15.03%"
-          bgColor="bg-[#F6F5FA]"
+          bgColor="bg-[#E9ECFA]"
         />
         <InfoCard
           title="Ortalama Süt"
           value="2,318"
           change="+6.08%"
-          bgColor="bg-[#F0F5FA]"
+          bgColor="bg-[#E4F0FC]"
         />
       </div>
 
