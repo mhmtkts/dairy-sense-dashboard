@@ -14,7 +14,7 @@ const DashboardPage = () => {
         </button>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-8">
         <InfoCard
           title="Son 24 Saat Süt"
           value="7,265"
