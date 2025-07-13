@@ -58,7 +58,7 @@ const Chart = () => {
       </div>
 
       {/* Grafik Alanı */}
-      <div className="flex-grow w-full h-80">
+      <div className="flex-grow w-full h-64">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
             data={data}
