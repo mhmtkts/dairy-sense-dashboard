@@ -84,7 +84,7 @@ const RightPanel = () => {
       <aside className="flex-shrink-0 bg-white p-6 flex flex-col space-y-6 border-l border-gray-200 overflow-y-auto">
         
         <div>
-          <h3 className="font-semibold text-gray-800 mb-2">Bildirimler</h3>
+          <h3 className="font-normal text-gray-800 mb-2">Bildirimler</h3>
           <div className="space-y-1">
             {notifications.map(item => (
               <ListItem key={item.id} {...item} onClick={handleItemClick} />

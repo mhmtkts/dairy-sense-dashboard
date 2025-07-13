@@ -7,7 +7,7 @@ const InfoCard = ({ title, value, change, bgColor = 'bg-gray-50' }) => {
   const TrendIcon = isPositive ? FiTrendingUp : FiTrendingDown;
 
   return (
-    <div className={`${bgColor} p-5 rounded-2xl flex flex-col justify-between h-full`}>
+    <div className={`${bgColor} p-5 rounded-2xl flex flex-col justify-between h-full min-h-28`}>
       <p className="text-sm font-medium text-gray-900">{title}</p>
       
       <div className="flex justify-start gap-5 mt-2">
