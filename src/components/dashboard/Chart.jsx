@@ -49,7 +49,7 @@ const Chart = () => {
   const [activeTab, setActiveTab] = useState('Toplam Süt');
 
    return (
-    <div className="bg-[#F8F8F8] p-6 rounded-2xl w-2/3 shadow-sm h-full flex flex-col">
+    <div className="bg-[#F8F8F8] p-6 rounded-2xl shadow-sm h-full flex flex-col">
       {/* Grafik Başlığı: Sekmeler ve Açıklamalar */}
       <div className="flex justify-between items-center mb-6">
         <ChartTabs activeTab={activeTab} setActiveTab={setActiveTab} />
