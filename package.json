@@ -13,6 +13,7 @@
     "@tailwindcss/vite": "^4.1.11",
     "axios": "^1.10.0",
     "i18next": "^25.3.2",
+    "i18next-browser-languagedetector": "^8.2.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-grid-layout": "^1.5.2",

@@ -1,0 +1,19 @@
+{
+  "dashboard": "Kontrol Paneli",
+  "default": "Varsayılan",
+  "search_cow": "İnek Ara",
+  "reports": "Raporlar",
+  "protocols": "Protokoller",
+  "events": "Olaylar",
+  "agenda": "Ajanda",
+  "users": "Kullanıcılar",
+  "treatments": "Tedaviler",
+  "chats": "Sohbetler",
+  "notifications": "Bildirimler",
+  "recent_actions": "Son İşlemler",
+  "vets": "Hekimler",
+  "change_language": "Dili Değiştir",
+  "settings": "Ayarlar",
+  "defined_events": "Tanımlı Olaylar",
+  "defined_events2": "Tanımlanmış Olaylar"
+}

@@ -1,0 +1,19 @@
+{
+  "dashboard": "Dashboard",
+  "default": "Default",
+  "search_cow": "Search Cow",
+  "reports": "Reports",
+  "protocols": "Protocols",
+  "events": "Events",
+  "agenda": "Agenda",
+  "users": "Users",
+  "treatments": "Treatments",
+  "chats": "Chats",
+  "notifications": "Notifications",
+  "recent_actions": "Recent Actions",
+  "vets": "Vets",
+  "change_language": "Change Language",
+  "settings": "Settings",
+  "defined_events": "Defined Events",
+  "defined_events2": "Configured Events"
+}
