@@ -1,4 +1,3 @@
-import React from 'react';
 import { FiTrendingUp, FiTrendingDown } from 'react-icons/fi';
 
 const InfoCard = ({ title, value, change, bgColor = 'bg-gray-50' }) => {

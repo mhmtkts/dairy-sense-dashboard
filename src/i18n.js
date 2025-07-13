@@ -16,16 +16,13 @@ const resources = {
 };
 
 i18n
-  // Tarayıcı dilini algılaması için eklentiyi ekliyoruz
   .use(LanguageDetector)
-  // i18n'i react-i18next'e iletiyoruz
   .use(initReactI18next)
-  // i18n'i başlatıyoruz
   .init({
     resources,
-    fallbackLng: 'tr', // Eğer algılanan dilin çevirisi yoksa Türkçe'yi kullan
+    fallbackLng: 'tr',
     interpolation: {
-      escapeValue: false // React zaten XSS'e karşı koruma sağladığı için gerekli değil
+      escapeValue: false
     }
   });
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { FiSearch, FiSun, FiGlobe } from 'react-icons/fi';
 import { RiBookletLine } from "react-icons/ri";

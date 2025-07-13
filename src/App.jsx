@@ -1,4 +1,3 @@
-import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Sidebar from './components/layout/Sidebar';
 import DashboardPage from './pages/DashboardPage';
@@ -16,16 +15,12 @@ function App() {
     <div className="flex h-screen bg-white font-sans">
       <Sidebar />
       
-      {/* ORTA SÜTUN İÇİN YENİ ANA KAPSAYICI */}
       <div className="flex-1 flex flex-col overflow-hidden">
-        {/* Navbar artık padding'den etkilenmiyor ve en üstte */}
         <Navbar />
 
-        {/* Asıl içerik alanı şimdi kendi başına ve scroll edilebilir */}
         <main className="flex-1 p-6 overflow-y-auto">
           <Routes>
             <Route path="/" element={<DashboardPage />} />
-            {/* ... diğer rotalar ... */}
             <Route path="/reports" element={<PlaceholderPage />} />
             <Route path="/protocols" element={<PlaceholderPage />} />
             <Route path="/events" element={<PlaceholderPage />} />

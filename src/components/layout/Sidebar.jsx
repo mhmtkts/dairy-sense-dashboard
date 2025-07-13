@@ -1,4 +1,3 @@
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { PiChartPieSliceFill } from "react-icons/pi";
 import { PiShoppingBagOpen } from "react-icons/pi";

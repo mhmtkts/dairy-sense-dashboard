@@ -2,6 +2,8 @@ import InfoCard from "../components/dashboard/InfoCard";
 import { FiChevronDown } from "react-icons/fi";
 import Chart from "../components/dashboard/Chart";
 import StatusList from "../components/dashboard/StatusList";
+import MilkProduction from "../components/dashboard/MilkProduction";
+import InventoryDonut from "../components/dashboard/InventoryDonut";
 
 const DashboardPage = () => {
   return (
@@ -47,6 +49,15 @@ const DashboardPage = () => {
         </div>
         <div className="lg:w-1/4 w-full">
           <StatusList />
+        </div>
+      </div>
+
+      <div className="flex flex-col lg:flex-row gap-6">
+        <div className="lg:w-1/2 w-full">
+          <MilkProduction />
+        </div>
+        <div className="lg:w-1/2 w-full">
+          <InventoryDonut />
         </div>
       </div>
     </div>
