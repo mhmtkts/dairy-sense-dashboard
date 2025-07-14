@@ -7,7 +7,7 @@ const statusData = [
   { title: 'Kızgınlıklar', filledSegments: 2 },
 ];
 
-const SegmentedProgressBar = ({ filled, total = 4 }) => {
+const SegmentedProgressBar = ({ filled, total = 3 }) => {
   return (
     <div className="flex items-center gap-1.5">
       {Array.from({ length: total }).map((_, index) => (
