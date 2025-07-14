@@ -23,9 +23,10 @@ const Navbar = () => {
         <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
           <IoMdStarOutline size={22} />
         </button>
-        <div>
-          <span className="text-gray-500">{t('dashboard')} /</span>
-          <span className="font-semibold text-gray-800"> {t('default')}</span>
+        <div className="flex items-center gap-4">
+          <span className="text-gray-500">{t('dashboard')}</span>
+          <span className="text-gray-500">/</span>
+          <span className="font-semibold text-gray-800">{t('default')}</span>
         </div>
       </div>
 
