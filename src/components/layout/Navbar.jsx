@@ -7,7 +7,7 @@ import { MdHistory } from "react-icons/md";
 import { useSidebar } from '../../context/SidebarContext';
 import { useRightPanel } from '../../context/RightPanelContext';
 
-const Navbar = () => {
+const Navbar = ({ toggleMobileSidebar }) => {
   const { t, i18n } = useTranslation();
   const { toggleSidebar } = useSidebar();
   const { toggleRightPanel } = useRightPanel();
@@ -21,7 +21,7 @@ const Navbar = () => {
   return (
     <header className="bg-white p-4 flex justify-between items-center border-b border-gray-200">
       <div className="flex items-center gap-2">
-        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 md:hidden">
+        <button onClick={toggleMobileSidebar} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 md:hidden">
           <FiMenu size={22} />
         </button>
 

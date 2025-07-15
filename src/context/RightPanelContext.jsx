@@ -4,8 +4,7 @@ import React, { createContext, useState, useContext } from 'react';
 const RightPanelContext = createContext();
 
 export const RightPanelProvider = ({ children }) => {
-  const [isRightPanelOpen, setIsRightPanelOpen] = useState(false); // Başlangıçta kapalı
-
+  const [isRightPanelOpen, setIsRightPanelOpen] = useState(true);
   const toggleRightPanel = () => {
     setIsRightPanelOpen(prev => !prev);
   };

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useOutletContext } from "react-router-dom";
 import { Responsive, WidthProvider } from "react-grid-layout";
 import InfoCard from "../components/dashboard/InfoCard";
 import { FiChevronDown } from "react-icons/fi";
@@ -11,6 +12,8 @@ import InventoryDonut from "../components/dashboard/InventoryDonut";
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const DashboardPage = () => {
+  const { isRightPanelOpen } = useOutletContext();
+
   const initialLayouts = {
     lg: [
       { i: "info1", x: 0, y: 0, w: 6, h: 2 },
@@ -54,6 +57,14 @@ const DashboardPage = () => {
     }
   });
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.dispatchEvent(new Event('resize'));
+    }, 350); 
+
+    return () => clearTimeout(timer);
+  }, [isRightPanelOpen]);
+
   const handleLayoutChange = (layout, allLayouts) => {
     try {
       localStorage.setItem("dashboard-layouts", JSON.stringify(allLayouts));
@@ -67,7 +78,7 @@ const DashboardPage = () => {
     <div className="space-y-4">
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Overview</h1>
-        <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-lg hover:bg-gray-50">
+        <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700  hover:bg-gray-50">
           <span>Bugün</span>
           <FiChevronDown />
         </button>
@@ -83,29 +94,30 @@ const DashboardPage = () => {
         margin={[15, 15]}
         compactType="vertical"
       >
-        <div key="info1" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        {/* DEĞİŞİKLİK: Tüm div'lerden "flex" sınıfı kaldırıldı */}
+        <div key="info1" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <InfoCard title="Son 24 Saat Süt" value="7,265" change="+11.01%" bgColor="bg-[#E9ECFA]" />
         </div>
-        <div key="info2" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="info2" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <InfoCard title="Dün Toplam Süt" value="3,671" change="-0.03%" bgColor="bg-[#E4F0FC]" />
         </div>
-        <div key="info3" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="info3" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <InfoCard title="Sağılan İnek Sayısı" value="156" change="+15.03%" bgColor="bg-[#E9ECFA]" />
         </div>
-        <div key="info4" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="info4" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <InfoCard title="Ortalama Süt" value="2,318" change="+6.08%" bgColor="bg-[#E4F0FC]" />
         </div>
 
-        <div key="chart" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="chart" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <Chart />
         </div>
-        <div key="status" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="status" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <StatusList />
         </div>
-        <div key="milk" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="milk" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <MilkProduction />
         </div>
-        <div key="donut" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
+        <div key="donut" className="bg-white rounded-2xl shadow-sm overflow-hidden">
           <InventoryDonut />
         </div>
       </ResponsiveGridLayout>

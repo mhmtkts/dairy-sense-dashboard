@@ -11,8 +11,9 @@ import { NavLink } from 'react-router-dom';
 import { IoIosPerson } from "react-icons/io";
 import { useSidebar } from '../../context/SidebarContext';
 
-const Sidebar = () => {
+const Sidebar = ({ isMobileVisible }) => {
   const { isSidebarOpen } = useSidebar();
+  const { t } = useTranslation();
 
   const navLinkClasses = ({ isActive }) => 
     `flex items-center px-4 py-3 text-sm font-medium rounded-2xl ${
@@ -21,25 +22,27 @@ const Sidebar = () => {
         : 'text-gray-700 hover:bg-gray-100'
   }`;
 
-  const {t} = useTranslation();
-
   return (
      <aside className={`
         bg-white text-gray-800 border-r border-gray-200
         flex flex-col flex-shrink-0
         transition-all duration-300 ease-in-out
-        fixed md:relative inset-y-0 left-0 z-30 
-        transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
-        md:translate-x-0
-
-        ${isSidebarOpen ? 'w-56' : 'md:w-20'}
+        
+        fixed inset-y-0 left-0 z-40 
+        transform 
+        
+        ${isMobileVisible ? 'translate-x-0' : '-translate-x-full'}
+        
+        md:relative md:translate-x-0
+        
+        ${isSidebarOpen ? 'w-56' : 'w-20'}
       `}
     >
-      <div className="flex items-center justify-center h-20  px-4">
-       <img src="/src/assets/cropped-cropped-DairySense.png" alt="Logo" className="object-cover" />
+      <div className="flex items-center justify-center h-20 px-4">
+       <img src="/src/assets/cropped-cropped-DairySense.png" alt="Logo" className={`object-contain transition-all duration-300 ${isSidebarOpen ? 'h-16' : 'h-8'}`} />
       </div>
 
-      <nav className="flex-1 px-4 py-6 space-y-2">
+      <nav className="flex-1 px-4 space-y-2">
         <NavLink to="/" className={navLinkClasses}>
           <PiChartPieSliceFill className='w-6 h-6 mr-3 flex-shrink-0' />
           {isSidebarOpen && <span className="whitespace-nowrap">{t('dashboard')}</span>}

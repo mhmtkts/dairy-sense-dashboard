@@ -85,45 +85,48 @@ const RightPanel = () => {
   return (
     <>
       <aside className={`
-        bg-white flex-col border-l border-gray-200 overflow-hidden
-        transition-all duration-300 ease-in-out flex-shrink-0
-        ${isRightPanelOpen ? 'w-72 p-6' : 'w-0 p-0 border-0'}
+        bg-white flex flex-col border-l border-gray-200 overflow-y-auto
+        transition-all duration-300 ease-in-out
+        
+        fixed inset-y-0 right-0 z-30 w-72 p-6
+        transform ${isRightPanelOpen ? 'translate-x-0' : 'translate-x-full'}
+        
+        md:relative md:inset-auto md:transform-none md:flex-shrink-0
+        ${isRightPanelOpen ? 'md:w-72 md:p-6' : 'md:w-0 md:p-0 md:border-l-0'}
       `}>
-        {isRightPanelOpen && (
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-normal text-gray-800 mb-2">Bildirimler</h3>
-              <div className="space-y-1">
-                {notifications.map(item => (
-                  <ListItem key={item.id} {...item} onClick={handleItemClick} />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
-              <div className="space-y-1">
-                {recentActions.map((item, index) => (
-                  <TimelineItem 
-                    key={item.id} 
-                    {...item} 
-                    onClick={handleItemClick}
-                    isLast={index === recentActions.length - 1}
-                  />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <h3 className="font-semibold text-gray-800 mb-2">Hekimler</h3>
-              <div className="space-y-1">
-                {vets.map(item => (
-                  <ListItem key={item.id} {...item} onClick={handleItemClick} />
-                ))}
-              </div>
+        <div className="space-y-6">
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-2">Bildirimler</h3>
+            <div className="space-y-1">
+              {notifications.map(item => (
+                <ListItem key={item.id} {...item} onClick={handleItemClick} />
+              ))}
             </div>
           </div>
-        )}
+
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
+            <div className="space-y-1">
+              {recentActions.map((item, index) => (
+                <TimelineItem 
+                  key={item.id} 
+                  {...item} 
+                  onClick={handleItemClick}
+                  isLast={index === recentActions.length - 1}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-semibold text-gray-800 mb-2">Hekimler</h3>
+            <div className="space-y-1">
+              {vets.map(item => (
+                <ListItem key={item.id} {...item} onClick={handleItemClick} />
+              ))}
+            </div>
+          </div>
+        </div>
       </aside>
 
       <Popup 
