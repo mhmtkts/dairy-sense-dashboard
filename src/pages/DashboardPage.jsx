@@ -1,5 +1,6 @@
 import { useState } from "react";
-import GridLayout from "react-grid-layout";
+// DEĞİŞİKLİK: ResponsiveGridLayout ve WidthProvider import edildi
+import { Responsive, WidthProvider } from "react-grid-layout";
 import InfoCard from "../components/dashboard/InfoCard";
 import { FiChevronDown } from "react-icons/fi";
 import Chart from "../components/dashboard/Chart";
@@ -11,40 +12,62 @@ import InventoryDonut from "../components/dashboard/InventoryDonut";
 // import 'react-grid-layout/css/styles.css';
 // import 'react-grid-layout/css/resizable.css';
 
+// DEĞİŞİKLİK: ResponsiveGridLayout'u WidthProvider ile sarmala
+const ResponsiveGridLayout = WidthProvider(Responsive);
+
 const DashboardPage = () => {
-  // 1. Tüm bileşenler için başlangıç layout'unu tanımla
-  const initialLayout = [
-    // Üst sıradaki bilgi kartları
-    { i: "info1", x: 0, y: 0, w: 5, h: 3.5 },
-    { i: "info2", x: 5, y: 0, w: 5, h: 3.5 },
-    { i: "info3", x: 10, y: 0, w: 5, h: 3.5 },
-    { i: "info4", x: 15, y: 0, w: 5, h: 3.5 },
+  // 1. Farklı ekran boyutları için başlangıç layout'larını tanımla
+  const initialLayouts = {
+    lg: [ // Masaüstü (1200px ve üzeri)
+      { i: "info1", x: 0, y: 0, w: 6, h: 2 },
+      { i: "info2", x: 6, y: 0, w: 6, h: 2 },
+      { i: "info3", x: 12, y: 0, w: 6, h: 2 },
+      { i: "info4", x: 18, y: 0, w: 6, h: 2 },
+      { i: "chart", x: 0, y: 2, w: 18, h: 8 },
+      { i: "status", x: 18, y: 2, w: 6, h: 8 },
+      { i: "milk", x: 0, y: 10, w: 12, h: 8 },
+      { i: "donut", x: 12, y: 10, w: 12, h: 8 },
+    ],
+    md: [ // Tablet (996px ve üzeri)
+      { i: "info1", x: 0, y: 0, w: 5, h: 2 },
+      { i: "info2", x: 5, y: 0, w: 5, h: 2 },
+      { i: "info3", x: 0, y: 2, w: 5, h: 2 },
+      { i: "info4", x: 5, y: 2, w: 5, h: 2 },
+      { i: "chart", x: 0, y: 4, w: 10, h: 8 },
+      { i: "status", x: 0, y: 12, w: 10, h: 8 },
+      { i: "milk", x: 0, y: 20, w: 10, h: 8 },
+      { i: "donut", x: 0, y: 28, w: 10, h: 8 },
+    ],
+    sm: [ // Mobil (768px ve üzeri)
+      { i: "info1", x: 0, y: 0, w: 6, h: 2 },
+      { i: "info2", x: 0, y: 2, w: 6, h: 2 },
+      { i: "info3", x: 0, y: 4, w: 6, h: 2 },
+      { i: "info4", x: 0, y: 6, w: 6, h: 2 },
+      { i: "chart", x: 0, y: 8, w: 6, h: 8 },
+      { i: "status", x: 0, y: 16, w: 6, h: 8 },
+      { i: "milk", x: 0, y: 24, w: 6, h: 8 },
+      { i: "donut", x: 0, y: 32, w: 6, h: 8 },
+    ],
+  };
 
-    // Alt sıradaki grafikler ve listeler
-    { i: "chart", x: 0, y: 2, w: 15, h: 12 },
-    { i: "status", x: 15, y: 2, w: 5, h: 12 },
-    { i: "milk", x: 0, y: 11, w: 10, h: 10 },
-    { i: "donut", x: 10, y: 11, w: 10, h: 10 },
-  ];
-
-  // 2. Layout'u state'te tut ve tarayıcı hafızasından (localStorage) yükle
-  const [layout, setLayout] = useState(() => {
+  // 2. Layout'ları state'te tut ve tarayıcı hafızasından yükle
+  const [layouts, setLayouts] = useState(() => {
     try {
-      const savedLayout = localStorage.getItem("dashboard-layout");
-      return savedLayout ? JSON.parse(savedLayout) : initialLayout;
+      const savedLayouts = localStorage.getItem("dashboard-layouts");
+      return savedLayouts ? JSON.parse(savedLayouts) : initialLayouts;
     } catch (error) {
-      console.error("Failed to parse layout from localStorage", error);
-      return initialLayout;
+      console.error("Failed to parse layouts from localStorage", error);
+      return initialLayouts;
     }
   });
 
-  // 3. Layout her değiştiğinde (sürükleme/boyutlandırma) değişikliği kaydet
-  const handleLayoutChange = (newLayout) => {
+  // 3. Layout her değiştiğinde tüm layout setini kaydet
+  const handleLayoutChange = (layout, allLayouts) => {
     try {
-      localStorage.setItem("dashboard-layout", JSON.stringify(newLayout));
-      setLayout(newLayout);
+      localStorage.setItem("dashboard-layouts", JSON.stringify(allLayouts));
+      setLayouts(allLayouts);
     } catch (error) {
-      console.error("Failed to save layout to localStorage", error);
+      console.error("Failed to save layouts to localStorage", error);
     }
   };
 
@@ -52,52 +75,52 @@ const DashboardPage = () => {
     <div className="space-y-4">
       {/* Sayfa Başlığı */}
       <div className="flex justify-between items-center">
-        <h1 className="text-sm font-bold text-gray-800">Overview</h1>
-        <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+        <h1 className="text-xl font-bold text-gray-800">Overview</h1>
+        <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-lg hover:bg-gray-50">
           <span>Bugün</span>
           <FiChevronDown />
         </button>
       </div>
 
       {/* Sürükle-Bırak Izgara Alanı */}
-      <GridLayout
+      <ResponsiveGridLayout
         className="layout"
-        layout={layout}
-        cols={24}
-        rowHeight={20} // Daha hassas kontrol için satır yüksekliği
-        width={1200} // Genişlik (genellikle dinamik olarak ayarlanır, ama sabit de olabilir)
+        layouts={layouts}
+        breakpoints={{ lg: 1200, md: 996, sm: 768, xs: 480, xxs: 0 }}
+        cols={{ lg: 24, md: 10, sm: 6, xs: 4, xxs: 2 }}
+        rowHeight={30}
         onLayoutChange={handleLayoutChange}
-        margin={[15, 15]} // Elemanlar arası boşluk [yatay, dikey]
-        compactType="vertical" // Çakışmaları önlemek için dikey sıkıştırma
+        margin={[15, 15]}
+        compactType="vertical"
       >
         {/* Bilgi Kartları */}
-        <div key="info1" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="info1" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InfoCard title="Son 24 Saat Süt" value="7,265" change="+11.01%" bgColor="bg-[#E9ECFA]" />
         </div>
-        <div key="info2" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="info2" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InfoCard title="Dün Toplam Süt" value="3,671" change="-0.03%" bgColor="bg-[#E4F0FC]" />
         </div>
-        <div key="info3" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="info3" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InfoCard title="Sağılan İnek Sayısı" value="156" change="+15.03%" bgColor="bg-[#E9ECFA]" />
         </div>
-        <div key="info4" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="info4" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InfoCard title="Ortalama Süt" value="2,318" change="+6.08%" bgColor="bg-[#E4F0FC]" />
         </div>
 
         {/* Ana Grafikler ve Listeler */}
-        <div key="chart" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="chart" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <Chart />
         </div>
-        <div key="status" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="status" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <StatusList />
         </div>
-        <div key="milk" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="milk" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <MilkProduction />
         </div>
-        <div key="donut" className="bg-white rounded-2xl shadow-sm overflow-hidden">
+        <div key="donut" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InventoryDonut />
         </div>
-      </GridLayout>
+      </ResponsiveGridLayout>
     </div>
   );
 };

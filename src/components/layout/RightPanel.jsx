@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Popup from '../dashboard/Popup';
 import { PiBugBeetle, PiBroadcast  } from "react-icons/pi";
 import { LiaUser } from "react-icons/lia";
+import { useRightPanel } from '../../context/RightPanelContext';
+
 
 const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => (
   <div
@@ -31,7 +33,7 @@ const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
     <div className="relative flex flex-col items-center flex-shrink-0">
       <img src={imageUrl} alt={title} className="w-8 h-8 rounded-full object-cover z-10" />
       {!isLast && (
-        <div className="absolute top-8 h-1/2 mt-1 w-px bg-gray-200"></div>
+        <div className="absolute top-8 h-full -mt-1 w-px bg-gray-200"></div>
       )}
     </div>
     
@@ -44,6 +46,7 @@ const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
 
 
 const RightPanel = () => {
+  const { isRightPanelOpen } = useRightPanel();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupTitle, setPopupTitle] = useState('');
 
@@ -81,40 +84,47 @@ const RightPanel = () => {
 
   return (
     <>
-      <aside className="flex-shrink-0 bg-white p-6 flex flex-col space-y-6 border-l border-gray-200 overflow-y-auto">
-        
-        <div>
-          <h3 className="font-normal text-gray-800 mb-2">Bildirimler</h3>
-          <div className="space-y-1">
-            {notifications.map(item => (
-              <ListItem key={item.id} {...item} onClick={handleItemClick} />
-            ))}
-          </div>
-        </div>
+      <aside className={`
+        bg-white flex-col border-l border-gray-200 overflow-hidden
+        transition-all duration-300 ease-in-out flex-shrink-0
+        ${isRightPanelOpen ? 'w-72 p-6' : 'w-0 p-0 border-0'}
+      `}>
+        {/* DEĞİŞİKLİK: Tüm içerik bu koşulun içine alındı */}
+        {isRightPanelOpen && (
+          <div className="space-y-6">
+            <div>
+              <h3 className="font-normal text-gray-800 mb-2">Bildirimler</h3>
+              <div className="space-y-1">
+                {notifications.map(item => (
+                  <ListItem key={item.id} {...item} onClick={handleItemClick} />
+                ))}
+              </div>
+            </div>
 
-        <div>
-          <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
-          <div className="space-y-1">
-            {recentActions.map((item, index) => (
-              <TimelineItem 
-                key={item.id} 
-                {...item} 
-                onClick={handleItemClick}
-                isLast={index === recentActions.length - 1}
-              />
-            ))}
-          </div>
-        </div>
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
+              <div className="space-y-1">
+                {recentActions.map((item, index) => (
+                  <TimelineItem 
+                    key={item.id} 
+                    {...item} 
+                    onClick={handleItemClick}
+                    isLast={index === recentActions.length - 1}
+                  />
+                ))}
+              </div>
+            </div>
 
-        <div>
-          <h3 className="font-semibold text-gray-800 mb-2">Hekimler</h3>
-          <div className="space-y-1">
-            {vets.map(item => (
-              <ListItem key={item.id} {...item} onClick={handleItemClick} />
-            ))}
+            <div>
+              <h3 className="font-semibold text-gray-800 mb-2">Hekimler</h3>
+              <div className="space-y-1">
+                {vets.map(item => (
+                  <ListItem key={item.id} {...item} onClick={handleItemClick} />
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-
+        )}
       </aside>
 
       <Popup 

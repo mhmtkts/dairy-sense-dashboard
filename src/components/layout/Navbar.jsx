@@ -1,36 +1,53 @@
 import { useTranslation } from 'react-i18next';
-import { FiSearch, FiSun, FiGlobe } from 'react-icons/fi';
+import { FiSearch, FiSun, FiGlobe, FiMenu } from 'react-icons/fi';
 import { RiBookletLine } from "react-icons/ri";
 import { IoMdStarOutline } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
-import { MdHistory } from "react-icons/md"
+import { MdHistory } from "react-icons/md";
+import { useSidebar } from '../../context/SidebarContext';
+import { useRightPanel } from '../../context/RightPanelContext'; // Yeni hook'u import et
 
 const Navbar = () => {
-
   const { t, i18n } = useTranslation();
+  const { toggleSidebar } = useSidebar();
+  const { toggleRightPanel } = useRightPanel();
+
 
   const handleLanguageChange = () => {
     const newLanguage = i18n.language === 'tr' ? 'en' : 'tr';
     i18n.changeLanguage(newLanguage);
-  }
+  };
 
   return (
     <header className="bg-white p-4 flex justify-between items-center border-b border-gray-200">
       <div className="flex items-center gap-2">
-        <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-          <RiBookletLine size={20} />
+        {/* Sadece mobilde görünen hamburger menü butonu */}
+        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 md:hidden">
+          <FiMenu size={22} />
         </button>
-        <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
-          <IoMdStarOutline size={22} />
-        </button>
-        <div className="flex items-center gap-4">
-          <span className="text-gray-500">{t('dashboard')}</span>
-          <span className="text-gray-500">/</span>
-          <span className="font-semibold text-gray-800">{t('default')}</span>
+
+        {/* Mevcut butonlar ve breadcrumb, mobilde gizlenecek */}
+        <div className="hidden md:flex items-center gap-2">
+          {/* DEĞİŞİKLİK: Bu butona onClick olayı eklendi */}
+          <button 
+            onClick={toggleSidebar} 
+            className="p-2 rounded-full hover:bg-gray-100 text-gray-600"
+          >
+            <RiBookletLine size={20} />
+          </button>
+          <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
+            <IoMdStarOutline size={22} />
+          </button>
+          <div className="flex items-center gap-4">
+            <span className="text-gray-500">{t('dashboard')}</span>
+            <span className="text-gray-500">/</span>
+            <span className="font-semibold text-gray-800">{t('default')}</span>
+          </div>
         </div>
       </div>
 
-      <div className="relative ml-auto mr-4 w-1/5">
+      {/* Arama çubuğu, mobilde gizlenecek */}
+      <div className="relative ml-auto mr-4 w-1/5 hidden md:block">
         <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input
           type="text"
@@ -57,7 +74,10 @@ const Navbar = () => {
         <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
           <IoNotificationsOutline size={22} />
         </button>
-        <button className="p-2 rounded-full hover:bg-gray-100 text-gray-600">
+        <button 
+          onClick={toggleRightPanel}
+          className="p-2 rounded-full hover:bg-gray-100 text-gray-600"
+        >
           <RiBookletLine size={20} />
         </button>
       </div>

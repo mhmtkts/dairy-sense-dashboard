@@ -1,39 +1,52 @@
-import { Routes, Route } from 'react-router-dom';
-import Sidebar from './components/layout/Sidebar';
-import DashboardPage from './pages/DashboardPage';
-import Navbar from './components/layout/Navbar';
-import RightPanel from './components/layout/RightPanel';
+import { Outlet } from "react-router-dom";
+import Sidebar from "./components/layout/Sidebar";
+import Navbar from "./components/layout/Navbar";
+import RightPanel from "./components/layout/RightPanel";
+import { SidebarProvider, useSidebar } from "./context/SidebarContext";
+import { RightPanelProvider } from "./context/RightPanelContext";
 
-const PlaceholderPage = () => (
-  <div className="p-4">
-    <h2 className="text-xl bg-white">Bu sayfanın içeriği case study kapsamında değildir.</h2>
-  </div>
-);
+// Context hook'larına erişebilmek için yeni bir ara bileşen
+const AppLayout = () => {
+  const { isSidebarOpen, toggleSidebar } = useSidebar();
 
-function App() {
   return (
-    <div className="flex h-screen bg-white font-sans">
+    <div className="relative flex h-screen bg-gray-100 overflow-hidden">
       <Sidebar />
       
-      <div className="flex-1 flex flex-col overflow-hidden">
+      {/* --- DÜZELTME: Ana içerik alanının kaymasını engelleme --- */}
+      <div className={`
+        flex-1 flex flex-col transition-all duration-300 ease-in-out
+        ${isSidebarOpen ? 'md:ml-0' : 'md:ml-0'} 
+      `}>
         <Navbar />
-
-        <main className="flex-1 p-6 overflow-y-auto">
-          <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/reports" element={<PlaceholderPage />} />
-            <Route path="/protocols" element={<PlaceholderPage />} />
-            <Route path="/events" element={<PlaceholderPage />} />
-            <Route path="/agenda" element={<PlaceholderPage />} />
-            <Route path="/users" element={<PlaceholderPage />} />
-            <Route path="/treatments" element={<PlaceholderPage />} />
-            <Route path="/chats" element={<PlaceholderPage />} />
-          </Routes>
+        <main className="flex-1 overflow-y-auto p-2 md:p-4">
+          <Outlet />
         </main>
       </div>
-
+      
       <RightPanel />
+
+      {/* --- DÜZELTME: MOBİL İÇİN OVERLAY --- */}
+      {/* Kenar çubuğu mobilde açıkken, dışarıya tıklamayı yakalamak için bu overlay eklenir. */}
+      {isSidebarOpen && (
+        <div 
+          onClick={toggleSidebar} 
+          className="fixed inset-0 bg-opacity-50 z-20 md:hidden"
+          aria-label="Close sidebar"
+        ></div>
+      )}
     </div>
+  );
+};
+
+// Ana App bileşeni Provider'ları sarmalar
+function App() {
+  return (
+    <SidebarProvider>
+      <RightPanelProvider>
+        <AppLayout />
+      </RightPanelProvider>
+    </SidebarProvider>
   );
 }
 
