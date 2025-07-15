@@ -5,7 +5,7 @@ import { IoMdStarOutline } from "react-icons/io";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdHistory } from "react-icons/md";
 import { useSidebar } from '../../context/SidebarContext';
-import { useRightPanel } from '../../context/RightPanelContext'; // Yeni hook'u import et
+import { useRightPanel } from '../../context/RightPanelContext';
 
 const Navbar = () => {
   const { t, i18n } = useTranslation();
@@ -21,14 +21,11 @@ const Navbar = () => {
   return (
     <header className="bg-white p-4 flex justify-between items-center border-b border-gray-200">
       <div className="flex items-center gap-2">
-        {/* Sadece mobilde görünen hamburger menü butonu */}
         <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 md:hidden">
           <FiMenu size={22} />
         </button>
 
-        {/* Mevcut butonlar ve breadcrumb, mobilde gizlenecek */}
         <div className="hidden md:flex items-center gap-2">
-          {/* DEĞİŞİKLİK: Bu butona onClick olayı eklendi */}
           <button 
             onClick={toggleSidebar} 
             className="p-2 rounded-full hover:bg-gray-100 text-gray-600"
@@ -46,7 +43,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Arama çubuğu, mobilde gizlenecek */}
       <div className="relative ml-auto mr-4 w-1/5 hidden md:block">
         <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
         <input

@@ -28,17 +28,13 @@ const Sidebar = () => {
         bg-white text-gray-800 border-r border-gray-200
         flex flex-col flex-shrink-0
         transition-all duration-300 ease-in-out
-        
-        /* --- MOBİL İÇİN DEĞİŞİKLİKLER --- */
         fixed md:relative inset-y-0 left-0 z-30 
         transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
         md:translate-x-0
 
-        /* --- MASAÜSTÜ İÇİN DEĞİŞİKLİKLER --- */
         ${isSidebarOpen ? 'w-56' : 'md:w-20'}
       `}
     >
-      {/* Logo Alanı */}
       <div className="flex items-center justify-center h-20  px-4">
        <img src="/src/assets/cropped-cropped-DairySense.png" alt="Logo" className="object-cover" />
       </div>

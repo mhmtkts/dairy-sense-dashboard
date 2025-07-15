@@ -1,5 +1,4 @@
 import { useState } from "react";
-// DEĞİŞİKLİK: ResponsiveGridLayout ve WidthProvider import edildi
 import { Responsive, WidthProvider } from "react-grid-layout";
 import InfoCard from "../components/dashboard/InfoCard";
 import { FiChevronDown } from "react-icons/fi";
@@ -8,17 +7,12 @@ import StatusList from "../components/dashboard/StatusList";
 import MilkProduction from "../components/dashboard/MilkProduction";
 import InventoryDonut from "../components/dashboard/InventoryDonut";
 
-// Gerekli CSS dosyalarını projenizin ana giriş noktasına (örn: main.jsx) eklemeyi unutmayın:
-// import 'react-grid-layout/css/styles.css';
-// import 'react-grid-layout/css/resizable.css';
 
-// DEĞİŞİKLİK: ResponsiveGridLayout'u WidthProvider ile sarmala
 const ResponsiveGridLayout = WidthProvider(Responsive);
 
 const DashboardPage = () => {
-  // 1. Farklı ekran boyutları için başlangıç layout'larını tanımla
   const initialLayouts = {
-    lg: [ // Masaüstü (1200px ve üzeri)
+    lg: [
       { i: "info1", x: 0, y: 0, w: 6, h: 2 },
       { i: "info2", x: 6, y: 0, w: 6, h: 2 },
       { i: "info3", x: 12, y: 0, w: 6, h: 2 },
@@ -28,7 +22,7 @@ const DashboardPage = () => {
       { i: "milk", x: 0, y: 10, w: 12, h: 8 },
       { i: "donut", x: 12, y: 10, w: 12, h: 8 },
     ],
-    md: [ // Tablet (996px ve üzeri)
+    md: [
       { i: "info1", x: 0, y: 0, w: 5, h: 2 },
       { i: "info2", x: 5, y: 0, w: 5, h: 2 },
       { i: "info3", x: 0, y: 2, w: 5, h: 2 },
@@ -38,7 +32,7 @@ const DashboardPage = () => {
       { i: "milk", x: 0, y: 20, w: 10, h: 8 },
       { i: "donut", x: 0, y: 28, w: 10, h: 8 },
     ],
-    sm: [ // Mobil (768px ve üzeri)
+    sm: [
       { i: "info1", x: 0, y: 0, w: 6, h: 2 },
       { i: "info2", x: 0, y: 2, w: 6, h: 2 },
       { i: "info3", x: 0, y: 4, w: 6, h: 2 },
@@ -50,7 +44,6 @@ const DashboardPage = () => {
     ],
   };
 
-  // 2. Layout'ları state'te tut ve tarayıcı hafızasından yükle
   const [layouts, setLayouts] = useState(() => {
     try {
       const savedLayouts = localStorage.getItem("dashboard-layouts");
@@ -61,7 +54,6 @@ const DashboardPage = () => {
     }
   });
 
-  // 3. Layout her değiştiğinde tüm layout setini kaydet
   const handleLayoutChange = (layout, allLayouts) => {
     try {
       localStorage.setItem("dashboard-layouts", JSON.stringify(allLayouts));
@@ -73,7 +65,6 @@ const DashboardPage = () => {
 
   return (
     <div className="space-y-4">
-      {/* Sayfa Başlığı */}
       <div className="flex justify-between items-center">
         <h1 className="text-xl font-bold text-gray-800">Overview</h1>
         <button className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-gray-700 bg-white border rounded-lg hover:bg-gray-50">
@@ -82,7 +73,6 @@ const DashboardPage = () => {
         </button>
       </div>
 
-      {/* Sürükle-Bırak Izgara Alanı */}
       <ResponsiveGridLayout
         className="layout"
         layouts={layouts}
@@ -93,7 +83,6 @@ const DashboardPage = () => {
         margin={[15, 15]}
         compactType="vertical"
       >
-        {/* Bilgi Kartları */}
         <div key="info1" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <InfoCard title="Son 24 Saat Süt" value="7,265" change="+11.01%" bgColor="bg-[#E9ECFA]" />
         </div>
@@ -107,7 +96,6 @@ const DashboardPage = () => {
           <InfoCard title="Ortalama Süt" value="2,318" change="+6.08%" bgColor="bg-[#E4F0FC]" />
         </div>
 
-        {/* Ana Grafikler ve Listeler */}
         <div key="chart" className="bg-white rounded-2xl shadow-sm overflow-hidden flex">
           <Chart />
         </div>

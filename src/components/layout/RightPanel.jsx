@@ -89,7 +89,6 @@ const RightPanel = () => {
         transition-all duration-300 ease-in-out flex-shrink-0
         ${isRightPanelOpen ? 'w-72 p-6' : 'w-0 p-0 border-0'}
       `}>
-        {/* DEĞİŞİKLİK: Tüm içerik bu koşulun içine alındı */}
         {isRightPanelOpen && (
           <div className="space-y-6">
             <div>
