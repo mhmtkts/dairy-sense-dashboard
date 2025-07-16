@@ -31,7 +31,7 @@ const StatusListItem = ({ title, filledSegments }) => (
 
 const StatusList = () => {
   return (
-    <div className="bg-white p-6 rounded-2xl shadow-sm h-full flex flex-col">
+    <div className="bg-[#F8F8F8] p-6 rounded-2xl shadow-sm h-full flex flex-col">
       <div className="mb-4">
         <h3 className="font-semibold text-gray-800 text-lg">Çiftlik Başarı Durumu</h3>
       </div>

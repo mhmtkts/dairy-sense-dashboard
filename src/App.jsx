@@ -21,11 +21,13 @@ const AppLayout = () => {
       <Sidebar isMobileVisible={isMobileSidebarVisible} />
 
       <div className={`
-        flex-1 flex flex-col transition-all duration-300 ease-in-out
+        flex-1 flex flex-col min-w-0 transition-all duration-300 ease-in-out
         ${isMobileSidebarVisible ? 'ml-20' : 'ml-0'}
         md:${isSidebarOpen ? 'ml-56' : 'ml-20'}
       `}>
-        <Navbar toggleMobileSidebar={toggleMobileSidebar} />
+        <div className="relative md:z-30">
+          <Navbar toggleMobileSidebar={toggleMobileSidebar} />
+        </div>
         <main className="flex-1 overflow-y-auto p-2 md:p-4">
           <Outlet context={{ isRightPanelOpen, toggleRightPanel }} />
         </main>
@@ -44,7 +46,7 @@ const AppLayout = () => {
       {isRightPanelOpen && (
         <div 
           onClick={toggleRightPanel} 
-          className="fixed inset-0 bg-opacity-50 z-20 md:hidden"
+          className="fixed inset-0 bg-opacity-50 z-20 lg:hidden"
           aria-label="Close right panel"
         ></div>
       )}

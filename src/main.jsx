@@ -3,11 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import DashboardPage from './pages/DashboardPage';
-import './index.css'; // Tailwind CSS
+import './index.css';
 import './i18n.js';
-
-
-// react-grid-layout için gerekli CSS dosyaları
 import 'react-grid-layout/css/styles.css';
 import 'react-resizable/css/styles.css';
 

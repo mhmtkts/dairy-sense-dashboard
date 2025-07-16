@@ -1,23 +1,35 @@
-import { useState } from 'react';
-import Popup from '../dashboard/Popup';
-import { PiBugBeetle, PiBroadcast  } from "react-icons/pi";
+import { useState } from "react";
+import Popup from "../dashboard/Popup";
+import { PiBugBeetle, PiBroadcast } from "react-icons/pi";
 import { LiaUser } from "react-icons/lia";
-import { useRightPanel } from '../../context/RightPanelContext';
+import { useRightPanel } from "../../context/RightPanelContext";
 
-
-const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => (
+const ListItem = ({
+  icon,
+  imageUrl,
+  title,
+  subtitle,
+  onClick,
+  iconBgColor,
+}) => (
   <div
     className="flex items-center gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
     onClick={() => onClick(title)}
   >
     {imageUrl ? (
-      <img src={imageUrl} alt={title} className="w-8 h-8 rounded-full object-cover flex-shrink-0" />
+      <img
+        src={imageUrl}
+        alt={title}
+        className="w-8 h-8 rounded-full object-cover flex-shrink-0"
+      />
     ) : (
-      <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${iconBgColor}`}>
+      <div
+        className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${iconBgColor}`}
+      >
         {icon}
       </div>
     )}
-    
+
     <div>
       <p className="font-medium text-gray-800 text-xs">{title}</p>
       <p className="text-[11px] text-gray-500">{subtitle}</p>
@@ -26,17 +38,21 @@ const ListItem = ({ icon, imageUrl, title, subtitle, onClick, iconBgColor }) => 
 );
 
 const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
-  <div 
+  <div
     className="flex items-start gap-3 p-1.5 rounded-lg hover:bg-gray-100 cursor-pointer"
     onClick={() => onClick(title)}
   >
     <div className="relative flex flex-col items-center flex-shrink-0">
-      <img src={imageUrl} alt={title} className="w-8 h-8 rounded-full object-cover z-10" />
+      <img
+        src={imageUrl}
+        alt={title}
+        className="w-8 h-8 rounded-full object-cover z-10"
+      />
       {!isLast && (
         <div className="absolute top-8 h-full -mt-1 w-px bg-gray-200"></div>
       )}
     </div>
-    
+
     <div className="pt-0.5">
       <p className="font-medium text-gray-800 text-xs">{title}</p>
       <p className="text-[11px] text-gray-500">{subtitle}</p>
@@ -44,11 +60,10 @@ const TimelineItem = ({ imageUrl, title, subtitle, onClick, isLast }) => (
   </div>
 );
 
-
 const RightPanel = () => {
   const { isRightPanelOpen } = useRightPanel();
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupTitle, setPopupTitle] = useState('');
+  const [popupTitle, setPopupTitle] = useState("");
 
   const handleItemClick = (title) => {
     setPopupTitle(title);
@@ -60,45 +75,128 @@ const RightPanel = () => {
   };
 
   const notifications = [
-    { id: 1, icon: <PiBugBeetle size={18} />, title: 'Veri Girişi Yapılmamış', subtitle: 'Bugün', iconBgColor: 'bg-[#ECEEFB]' },
-    { id: 2, icon: <LiaUser size={18} />, title: '4 Yeni Kızgınlık', subtitle: '59 dakika önce', iconBgColor: 'bg-[#E7F1FD]' },
-    { id: 3, icon: <PiBugBeetle size={18} />, title: '2 Kayıtsız Tasma Algılandı', subtitle: '12 saat önce', iconBgColor: 'bg-[#ECEEFB]' },
-    { id: 4, icon: <PiBroadcast size={18} />, title: '4 Tohumlama Yapıldı', subtitle: 'Delay için tıklayınız...', iconBgColor: 'bg-[#E7F1FD]' },
+    {
+      id: 1,
+      icon: <PiBugBeetle size={18} />,
+      title: "Veri Girişi Yapılmamış",
+      subtitle: "Bugün",
+      iconBgColor: "bg-[#ECEEFB]",
+    },
+    {
+      id: 2,
+      icon: <LiaUser size={18} />,
+      title: "4 Yeni Kızgınlık",
+      subtitle: "59 dakika önce",
+      iconBgColor: "bg-[#E7F1FD]",
+    },
+    {
+      id: 3,
+      icon: <PiBugBeetle size={18} />,
+      title: "2 Kayıtsız Tasma Algılandı",
+      subtitle: "12 saat önce",
+      iconBgColor: "bg-[#ECEEFB]",
+    },
+    {
+      id: 4,
+      icon: <PiBroadcast size={18} />,
+      title: "4 Tohumlama Yapıldı",
+      subtitle: "Delay için tıklayınız...",
+      iconBgColor: "bg-[#E7F1FD]",
+    },
   ];
 
   const recentActions = [
-    { id: 5, imageUrl: 'https://i.pravatar.cc/150?u=vet1', title: 'Gebelik Teşhisi: 24 Numara', subtitle: '2 saat önce' },
-    { id: 6, imageUrl: 'https://i.pravatar.cc/150?u=vet2', title: 'Kuruya ayrılış: 242 Numara', subtitle: '5 saat önce' },
-    { id: 7, imageUrl: 'https://i.pravatar.cc/150?u=system', title: 'Düşük bildirim: 2402', subtitle: '12 saat önce' },
-    { id: 8, imageUrl: 'https://i.pravatar.cc/150?u=admin', title: '1 Yeni Hayvan Eklendi: 2991', subtitle: 'Dün' },
-    { id: 9, imageUrl: 'https://i.pravatar.cc/150?u=vet3', title: 'Sürüden Çıkarıldı: 203', subtitle: '4 gün önce' },
+    {
+      id: 5,
+      imageUrl: "https://i.pravatar.cc/150?u=vet1",
+      title: "Gebelik Teşhisi: 24 Numara",
+      subtitle: "2 saat önce",
+    },
+    {
+      id: 6,
+      imageUrl: "https://i.pravatar.cc/150?u=vet2",
+      title: "Kuruya ayrılış: 242 Numara",
+      subtitle: "5 saat önce",
+    },
+    {
+      id: 7,
+      imageUrl: "https://i.pravatar.cc/150?u=system",
+      title: "Düşük bildirim: 2402",
+      subtitle: "12 saat önce",
+    },
+    {
+      id: 8,
+      imageUrl: "https://i.pravatar.cc/150?u=admin",
+      title: "1 Yeni Hayvan Eklendi: 2991",
+      subtitle: "Dün",
+    },
+    {
+      id: 9,
+      imageUrl: "https://i.pravatar.cc/150?u=vet3",
+      title: "Sürüden Çıkarıldı: 203",
+      subtitle: "4 gün önce",
+    },
   ];
 
   const vets = [
-    { id: 10, imageUrl: 'https://i.pravatar.cc/150?u=enes', title: 'Enes', subtitle: 'Online' },
-    { id: 11, imageUrl: 'https://i.pravatar.cc/150?u=furkan', title: 'Furkan', subtitle: 'Online' },
-    { id: 12, imageUrl: 'https://i.pravatar.cc/150?u=murat', title: 'Murat', subtitle: 'Çevrimdışı' },
-    { id: 13, imageUrl: 'https://i.pravatar.cc/150?u=ridvan', title: 'Rıdvan', subtitle: 'Çevrimdışı' },
-    { id: 14, imageUrl: 'https://i.pravatar.cc/150?u=emrah', title: 'Emrah', subtitle: 'Online' },
+    {
+      id: 10,
+      imageUrl: "https://i.pravatar.cc/150?u=enes",
+      title: "Enes",
+      subtitle: "Online",
+    },
+    {
+      id: 11,
+      imageUrl: "https://i.pravatar.cc/150?u=furkan",
+      title: "Furkan",
+      subtitle: "Online",
+    },
+    {
+      id: 12,
+      imageUrl: "https://i.pravatar.cc/150?u=murat",
+      title: "Murat",
+      subtitle: "Çevrimdışı",
+    },
+    {
+      id: 13,
+      imageUrl: "https://i.pravatar.cc/150?u=ridvan",
+      title: "Rıdvan",
+      subtitle: "Çevrimdışı",
+    },
+    {
+      id: 14,
+      imageUrl: "https://i.pravatar.cc/150?u=emrah",
+      title: "Emrah",
+      subtitle: "Online",
+    },
   ];
 
   return (
     <>
-      <aside className={`
-        bg-white flex flex-col border-l border-gray-200 overflow-y-auto
-        transition-all duration-300 ease-in-out
-        
-        fixed inset-y-0 right-0 z-30 w-72 p-6
-        transform ${isRightPanelOpen ? 'translate-x-0' : 'translate-x-full'}
-        
-        md:relative md:inset-auto md:transform-none md:flex-shrink-0
-        ${isRightPanelOpen ? 'md:w-72 md:p-6' : 'md:w-0 md:p-0 md:border-l-0'}
-      `}>
+      <aside
+        className={`
+          bg-white flex flex-col border-l border-gray-200 overflow-y-auto
+          transition-all duration-300 ease-in-out
+          
+          fixed inset-y-0 right-0 z-30
+          transform ${isRightPanelOpen ? "translate-x-0" : "translate-x-full"}
+          
+          md:relative md:inset-auto md:transform-none md:flex-shrink-0
+          
+          {/* --- ÇÖZÜM BURADA --- */}
+          {/* Genişlik ve padding sınıflarını koşulun içine taşıdık */}
+          ${isRightPanelOpen 
+            ? "w-4/6 max-w-sm p-4 md:w-72 md:p-6" 
+            : "w-0 p-0 border-l-0"
+          }
+        `}
+      >
+        {isRightPanelOpen && (
         <div className="space-y-6">
           <div>
             <h3 className="font-semibold text-gray-800 mb-2">Bildirimler</h3>
             <div className="space-y-1">
-              {notifications.map(item => (
+              {notifications.map((item) => (
                 <ListItem key={item.id} {...item} onClick={handleItemClick} />
               ))}
             </div>
@@ -108,9 +206,9 @@ const RightPanel = () => {
             <h3 className="font-semibold text-gray-800 mb-2">Son İşlemler</h3>
             <div className="space-y-1">
               {recentActions.map((item, index) => (
-                <TimelineItem 
-                  key={item.id} 
-                  {...item} 
+                <TimelineItem
+                  key={item.id}
+                  {...item}
                   onClick={handleItemClick}
                   isLast={index === recentActions.length - 1}
                 />
@@ -121,18 +219,19 @@ const RightPanel = () => {
           <div>
             <h3 className="font-semibold text-gray-800 mb-2">Hekimler</h3>
             <div className="space-y-1">
-              {vets.map(item => (
+              {vets.map((item) => (
                 <ListItem key={item.id} {...item} onClick={handleItemClick} />
               ))}
             </div>
           </div>
         </div>
+        )}
       </aside>
 
-      <Popup 
-        isOpen={isPopupOpen} 
-        onClose={handleClosePopup} 
-        title={popupTitle} 
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={handleClosePopup}
+        title={popupTitle}
       />
     </>
   );
