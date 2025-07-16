@@ -40,7 +40,7 @@ const Sidebar = ({ isMobileVisible }) => {
       `}
     >
       <div className="flex items-center justify-center h-20 px-4">
-       <img src="/src/assets/cropped-cropped-DairySense.png" alt="Logo" className={`object-contain transition-all duration-300 ${isSidebarOpen ? 'h-16' : 'h-8'}`} />
+       <img src="/cropped-cropped-DairySense.png" alt="Logo" className={`object-contain transition-all duration-300 ${isSidebarOpen ? 'h-16' : 'h-8'}`} />
       </div>
 
       <nav className="flex-1 px-4 space-y-2">
