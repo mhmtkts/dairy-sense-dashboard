@@ -6,17 +6,31 @@ import { IoNotificationsOutline } from "react-icons/io5";
 import { MdHistory } from "react-icons/md";
 import { useSidebar } from '../../context/SidebarContext';
 import { useRightPanel } from '../../context/RightPanelContext';
+import { useLocation } from 'react-router-dom';
 
 const Navbar = ({ toggleMobileSidebar }) => {
   const { t, i18n } = useTranslation();
   const { toggleSidebar } = useSidebar();
   const { toggleRightPanel } = useRightPanel();
+  const location = useLocation();
 
+  const pageTitles = {
+    '/': 'default',
+    '/reports': 'reports',
+    '/protocols': 'protocols',
+    '/events': 'defined_events',
+    '/agenda': 'settings',
+    '/users': 'defined_events2',
+    '/treatments': 'treatments',
+    '/chats': 'agenda',
+  };
 
   const handleLanguageChange = () => {
     const newLanguage = i18n.language === 'tr' ? 'en' : 'tr';
     i18n.changeLanguage(newLanguage);
   };
+
+  const currentPageTitleKey = pageTitles[location.pathname] || 'dashboard';
 
   return (
     <header className="bg-white p-4 flex justify-between items-center border-b border-gray-200">
@@ -38,7 +52,7 @@ const Navbar = ({ toggleMobileSidebar }) => {
           <div className="flex items-center gap-4">
             <span className="text-gray-500">{t('dashboard')}</span>
             <span className="text-gray-500">/</span>
-            <span className="font-semibold text-gray-800">{t('default')}</span>
+            <span className="font-semibold text-gray-800">{t(currentPageTitleKey)}</span>
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ const Sidebar = ({ isMobileVisible }) => {
           <LiaIdCardAltSolid className='w-6 h-6 mr-3 flex-shrink-0' />
           {isSidebarOpen && <span className="whitespace-nowrap">{t('defined_events')}</span>}
         </NavLink>
-        <NavLink to="/agenda" className={navLinkClasses}>
+        <NavLink to="/settings" className={navLinkClasses}>
           <PiIdentificationCard className='w-6 h-6 mr-3 flex-shrink-0' />
           {isSidebarOpen && <span className="whitespace-nowrap">{t('settings')}</span>}
         </NavLink>
@@ -72,7 +72,7 @@ const Sidebar = ({ isMobileVisible }) => {
           <PiNotebookLight className='w-6 h-6 mr-3 flex-shrink-0' />
           {isSidebarOpen && <span className="whitespace-nowrap">{t('treatments')}</span>}
         </NavLink>
-        <NavLink to="/chats" className={navLinkClasses}>
+        <NavLink to="/agenda" className={navLinkClasses}>
           <PiChatsCircle className='w-6 h-6 mr-3 flex-shrink-0' />
           {isSidebarOpen && <span className="whitespace-nowrap">{t('agenda')}</span>}
         </NavLink>

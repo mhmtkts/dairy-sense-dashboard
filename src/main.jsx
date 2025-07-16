@@ -29,22 +29,22 @@ const router = createBrowserRouter([
       },
       {
         path: 'events',
-        element: <PlaceholderPage title="Tanımlanmış Olaylar Sayfası" />,
+        element: <PlaceholderPage title="Tanımlı Olaylar Sayfası" />,
       },
       {
-        path: 'agenda',
+        path: 'settings',
         element: <PlaceholderPage title="Ayarlar Sayfası" />,
       },
       {
         path: 'users',
-        element: <PlaceholderPage title="Kullanıcılar Sayfası" />,
+        element: <PlaceholderPage title="Tanımlanmış Olaylar Sayfası" />,
       },
       {
         path: 'treatments',
-        element: <PlaceholderPage title="Tedariler Sayfası" />,
+        element: <PlaceholderPage title="Tedaviler Sayfası" />,
       },
       {
-        path: 'chats',
+        path: 'agenda',
         element: <PlaceholderPage title="Ajanda Sayfası" />,
       },
     ],
