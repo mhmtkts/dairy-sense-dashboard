@@ -10,6 +10,7 @@ import { PiChatsCircle } from "react-icons/pi";
 import { NavLink } from 'react-router-dom';
 import { IoIosPerson } from "react-icons/io";
 import { useSidebar } from '../../context/SidebarContext';
+import WeatherWidget from '../layout/WeatherWidget';
 
 const Sidebar = ({ isMobileVisible }) => {
   const { isSidebarOpen } = useSidebar();
@@ -77,8 +78,11 @@ const Sidebar = ({ isMobileVisible }) => {
         </NavLink>
       </nav>
 
+      <div className="mt-auto"> 
+        <WeatherWidget isSidebarOpen={isSidebarOpen} />
+      
       <div className="p-4 border-t border-gray-200">
-        <div className="flex items-center">
+        <div className={`flex items-center ${!isSidebarOpen && 'justify-center'}`}>
             <div className="w-7 h-7 bg-gray-300 rounded-full flex-shrink-0">
               <IoIosPerson className="w-7 h-7 pl-0.5 pr-0.5 text-gray-500" />
             </div>
@@ -88,6 +92,7 @@ const Sidebar = ({ isMobileVisible }) => {
               </div>
             )}
         </div>
+      </div>
       </div>
     </aside>
   );
